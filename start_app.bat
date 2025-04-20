@@ -1,0 +1,9 @@
+@echo off
+echo Starting Docker Desktop...
+start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+echo Waiting for Docker to start...
+timeout /t 30
+echo Starting Time Tracker app...
+wsl -d Ubuntu-22.04 -e bash -c "cd ~/time-tracker && docker-compose up -d"
+echo Time Tracker app started! Access at http://localhost
+pause
