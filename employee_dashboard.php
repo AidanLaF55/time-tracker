@@ -32,11 +32,14 @@ $stmt = $pdo->prepare("
     SELECT start_time, end_time
     FROM time_transactions
     WHERE employee_id = ?
-    ORDER BY start_time DESC
-    LIMIT 10
 ");
 $stmt->execute([$employee_id]);
-$transactions = $stmt->fetchAll();
+$transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Sort transactions by start_time (employee_id already filtered)
+usort($transactions, function($a, $b) {
+    return strtotime($a['start_time']) - strtotime($b['start_time']);
+});
+$transactions = array_slice($transactions, -10); // Last 10
 ?>
 
 <!DOCTYPE html>

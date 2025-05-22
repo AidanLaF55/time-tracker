@@ -22,7 +22,7 @@ $transaction = $stmt->fetch();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($transaction) {
-        $stmt = $pdo->prepare("UPDATE time_transactions SET end_time = NOW() WHERE id = ?");
+        $stmt = $pdo->prepare("UPDATE time_transactions SET end_time = DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:00') WHERE id = ?");
         if ($stmt->execute([$transaction['id']])) {
             $_SESSION['success'] = "Clocked out successfully";
         } else {

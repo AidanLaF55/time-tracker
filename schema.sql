@@ -1,4 +1,4 @@
--- create database time_tracking;
+create database if not exists time_tracking;
 USE time_tracking;
 
 

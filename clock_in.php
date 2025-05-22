@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($is_clocked_in) {
         $_SESSION['error'] = "You are already clocked in";
     } else {
-        $stmt = $pdo->prepare("INSERT INTO time_transactions (employee_id, start_time) VALUES (?, NOW())");
+        $stmt = $pdo->prepare("INSERT INTO time_transactions (employee_id, start_time) VALUES (?, DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:00'))");
         if ($stmt->execute([$employee_id])) {
             $_SESSION['success'] = "Clocked in successfully";
         } else {
